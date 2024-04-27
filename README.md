@@ -76,3 +76,28 @@ poetry version patch
 ## pypi にいれる release env みたいなやつ
 
 入れないほうが無難。
+
+## test.pypi は？
+
+めっちゃ flakey。成功するまでリトライするとかするといいかもしれない。ghaction には現在再試行するオプションはなさそうだったので 3 回同じ文を書く脳筋実装をした
+
+```
+    - name: publish testpypi
+      id: publish
+      uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        repository-url: https://test.pypi.org/legacy/
+      continue-on-error: true
+    - name: retry publish testpypi
+      if: steps.publish.outcome == 'failure'
+      uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        repository-url: https://test.pypi.org/legacy/
+      continue-on-error: true
+    - name: retry publish testpypi (2nd attempt)
+      if: steps.publish.outcome == 'failure'
+      uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        repository-url: https://test.pypi.org/legacy/
+      continue-on-error: true
+```

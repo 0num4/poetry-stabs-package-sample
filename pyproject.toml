@@ -2,7 +2,7 @@
 name = "poetry-stabs-package-sample"
 version = "0.1.0"
 description = ""
-authors = ["0num4 <you@example.com>"]
+authors = ["0num4 <r.oonuma@matsuri-tech.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]

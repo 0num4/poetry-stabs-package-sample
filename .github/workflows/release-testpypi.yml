@@ -10,13 +10,18 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version-file: pyproject.toml
-      - name: print python version
-        run: python --version
+      - uses: actions/checkout@v4
+      - uses: ./.github/setup@main
+      - name: print poetry version
+        run: poetry --version
+      - name: poetry version patch
+        run: poetry version patch
+      - name: git tag
+        run: git tag -a "v$(poetry version | awk '{print $2}')" -m "v$(poetry version | awk '{print $2}')"
+      - name: git push
+        run: git push origin "v$(poetry version | awk '{print $2}')"
+      - name: build
+        run: poetry build
       - name: upload artifact
         uses: actions/upload-artifact@v4
         with:

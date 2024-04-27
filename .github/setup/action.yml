@@ -1,0 +1,27 @@
+name: "setup python and poetry"
+description: "setup python and poetry"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Install poetry
+      run: pipx install poetry
+      shell: bash
+    - name: Set up Python 3.12
+      id: setup-python
+      uses: actions/setup-python@v5
+      with:
+        python-version-file: pyproject.toml
+        cache: "poetry"
+    - run: echo 'cache hit ${{ steps.setup-python.outputs.cache-hit }}'
+      shell: bash
+    - name: print python version
+      run: python --version
+      shell: bash
+    - name: set poetry config
+      run: |
+        poetry config virtualenvs.in-project true
+      shell: bash
+    - name: Install dependencies
+      run: poetry install --with dev
+      shell: bash

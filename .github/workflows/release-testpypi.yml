@@ -1,10 +1,7 @@
 name: release-testpypi
 on:
-  push:
-    branches:
-      - master
-      - release
-      - main
+  release:
+    types: [published]
 jobs:
   release:
     runs-on: ubuntu-latest

@@ -42,7 +42,7 @@ jobs:
       - name: Retrive release distributions
         uses: actions/download-artifact@v4
         with:
-          name: release
+          name: release-dists
           path: dist
       - name: publish testpypi
         uses: pypa/gh-action-pypi-publish@release/v1

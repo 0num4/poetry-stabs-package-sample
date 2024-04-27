@@ -101,3 +101,17 @@ poetry version patch
         repository-url: https://test.pypi.org/legacy/
       continue-on-error: true
 ```
+
+# badge
+
+https://zenn.dev/atu4403/articles/howto-poetry-dev#badge%E3%81%AE%E5%8F%96%E5%BE%97
+fury.io で取得できる。今は test.pypi なのでできないけど
+
+## その他 tips
+
+content: write を付けないと gh actions 上で該当のリポジトリへ push ができない
+
+```
+permissions:
+  contents: write
+```

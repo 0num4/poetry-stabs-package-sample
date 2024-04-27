@@ -45,3 +45,20 @@ HTTP Error 403: Invalid or non-existent authentication information. See https://
 ```
 poetry config pypi-token.testpypi "pypi-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 ```
+
+通った
+
+```
+❯ poetry publish --build -r testpypi
+There are 2 files ready for publishing. Build anyway? (yes/no) [no] yes
+Building poetry-stabs-package-sample (0.1.0)
+  - Building sdist
+  - Built poetry_stabs_package_sample-0.1.0.tar.gz
+  - Building wheel
+  - Built poetry_stabs_package_sample-0.1.0-py3-none-any.whl
+
+Publishing poetry-stabs-package-sample (0.1.0) to testpypi
+ - Uploading poetry_stabs_package_sample-0.1.0-py3-none-any.whl 100%
+ - Uploading poetry_stabs_package_sample-0.1.0.tar.gz 100%
+
+```

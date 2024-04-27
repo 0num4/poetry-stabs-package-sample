@@ -33,20 +33,20 @@ jobs:
       #     python setup.py sdist bdist_wheel
       #     python -m twine upload --repository testpypi dist/*
   pypi-publish:
-    environment:
-      name: "poetry-stabs-package-sample"
-
+    name: Publish to testpypi
     runs-on: ubuntu-latest
+    env:
+      name: pypi
+      url: https://test.pypi.org/project/poetry-stabs-package-sample/
     needs: release
     permissions:
       id-token: write
-      contents: read
     steps:
       - name: Retrive release distributions
         uses: actions/download-artifact@v4
         with:
           name: release-dists
-          path: dist
+          path: ./dist/
       - name: publish testpypi
         uses: pypa/gh-action-pypi-publish@release/v1
         with:

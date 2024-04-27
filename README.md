@@ -62,3 +62,9 @@ Publishing poetry-stabs-package-sample (0.1.0) to testpypi
  - Uploading poetry_stabs_package_sample-0.1.0.tar.gz 100%
 
 ```
+
+# バージョンを上げる
+
+```
+poetry version patch
+```

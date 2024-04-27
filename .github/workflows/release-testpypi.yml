@@ -8,6 +8,8 @@ on:
       - master
 jobs:
   release:
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
     steps:
       - name: checkout
@@ -52,7 +54,6 @@ jobs:
     needs: release
     permissions:
       id-token: write
-      contents: write
     steps:
       - name: download-artifact
         uses: actions/download-artifact@v4

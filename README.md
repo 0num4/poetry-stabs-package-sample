@@ -69,4 +69,10 @@ Publishing poetry-stabs-package-sample (0.1.0) to testpypi
 poetry version patch
 ```
 
-上でバージョンを上げても github 上の ci release ではバージョンは上がらなかったので pypi 上のバージョンは git tags のバージョンに依存してそう。pyproject.toml や自動で再デプロイするとバージョンが上がるわけではなさそう
+上でバージョンを上げても github 上の ci release ではバージョンは上がらなかったので ~~pypi 上のバージョンは git tags のバージョンに依存してそう。pyproject.toml や自動で再デプロイするとバージョンが上がるわけではなさそう~~
+
+そんなことはなくて普通に pyproject.toml に依存してる。ただし*poetry build*を忘れないこと
+
+## pypi にいれる release env みたいなやつ
+
+入れないほうが無難。

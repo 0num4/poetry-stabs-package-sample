@@ -1,0 +1,25 @@
+name: lints
+on:
+  pull_request:
+    branches:
+      - main
+      - master
+  push:
+    branches:
+      - main
+      - master
+jobs:
+  lints:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+      - name: Run lints
+        run: poetry run flake8
+      - name: Run mypy
+        run: poetry run mypy
+      - name: Run black
+        run: poetry run black --check .
+      - name: Run isort
+        run: poetry run isort --check .

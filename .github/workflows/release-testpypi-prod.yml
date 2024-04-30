@@ -1,0 +1,76 @@
+name: release-testpypi(prod)
+on:
+  # release:
+  #   types: [published]
+  push:
+    branches:
+      - main
+      - master
+jobs:
+  release:
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+      - name: print poetry version
+        run: poetry --version
+      - name: poetry version patch
+        run: poetry version patch
+      - name: Configure Git
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+      - name: git tag
+        run: git tag -a "v$(poetry version | awk '{print $2}')" -m "v$(poetry version | awk '{print $2}')"
+      - name: git push
+        run: git push origin "v$(poetry version | awk '{print $2}')"
+      - name: build
+        run: poetry build
+      - name: upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-dists
+          path: ./dist/
+      # - name: Install dependencies
+      #   run: |
+      #     python -m pip install --upgrade pip
+      #     pip install -r requirements.txt
+      # - name: Build and publish
+      #   env:
+      #     TWINE_USERNAME: __token__
+      #     TWINE_PASSWORD: ${{ secrets.TESTPYPI_PASSWORD }}
+      #   run: |
+      #     python setup.py sdist bdist_wheel
+      #     python -m twine upload --repository testpypi dist/*
+  pypi-publish:
+    name: Publish to testpypi
+    runs-on: ubuntu-latest
+    env:
+      name: pypi
+      url: https://test.pypi.org/project/poetry-stabs-package-sample/
+    needs: release
+    permissions:
+      id-token: write
+    steps:
+      - name: download-artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: release-dists
+          path: ./dist/
+      - name: publish-pypi-prod
+        id: publish
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          repository-url: https://test.pypi.org/legacy/
+        continue-on-error: true
+      - name: retry publish-pypi-prod
+        if: steps.publish.outcome == 'failure'
+        uses: pypa/gh-action-pypi-publish@release/v1
+        continue-on-error: true
+      - name: retry publish-pypi-prod (2nd attempt)
+        if: steps.publish.outcome == 'failure'
+        uses: pypa/gh-action-pypi-publish@release/v1
+        continue-on-error: true

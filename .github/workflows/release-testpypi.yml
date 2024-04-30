@@ -1,4 +1,4 @@
-name: release-testpypi
+name: release-pypi(test and prod)
 on:
   # release:
   #   types: [published]
@@ -45,7 +45,7 @@ jobs:
       #   run: |
       #     python setup.py sdist bdist_wheel
       #     python -m twine upload --repository testpypi dist/*
-  pypi-publish:
+  pypi-publish-test:
     name: Publish to testpypi
     runs-on: ubuntu-latest
     env:
@@ -69,12 +69,35 @@ jobs:
       - name: retry publish testpypi
         if: steps.publish.outcome == 'failure'
         uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          repository-url: https://test.pypi.org/legacy/
         continue-on-error: true
-      - name: retry publish testpypi (2nd attempt)
+      - name: retry publish-testpypi (2nd attempt)
         if: steps.publish.outcome == 'failure'
         uses: pypa/gh-action-pypi-publish@release/v1
+        continue-on-error: true
+  pypi-publish-prod:
+    name: Publish to pypi
+    runs-on: ubuntu-latest
+    env:
+      name: pypi
+      url: https://pypi.org/project/poetry-stabs-package-sample/
+    needs: release
+    permissions:
+      id-token: write
+    steps:
+      - name: download-artifact
+        uses: actions/download-artifact@v4
         with:
-          repository-url: https://test.pypi.org/legacy/
+          name: release-dists
+          path: ./dist/
+      - name: publish-pypi-prod
+        id: publish
+        uses: pypa/gh-action-pypi-publish@release/v1
+        continue-on-error: true
+      - name: retry publish-pypi-prod
+        if: steps.publish.outcome == 'failure'
+        uses: pypa/gh-action-pypi-publish@release/v1
+        continue-on-error: true
+      - name: retry publish-pypi-prod (2nd attempt)
+        if: steps.publish.outcome == 'failure'
+        uses: pypa/gh-action-pypi-publish@release/v1
         continue-on-error: true

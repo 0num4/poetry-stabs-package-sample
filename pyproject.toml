@@ -1,10 +1,11 @@
 [tool.poetry]
 name = "poetry-stabs-package-sample"
-version = "0.1.1"
-description = "{project description}"
+version = "0.1.2"
+description = "sample package for poetry-stabs"
 authors = ["0num4 <r.oonuma@matsuri-tech.com>"]
 homepage = "https://github.com/0num4"
 repository = "https://github.com/0num4/poetry-stabs-package-sample"
+license = "MIT"
 readme = "README.md"
 
 [tool.poetry.dependencies]
@@ -20,3 +21,6 @@ pydantic = "^2.7.1"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+setup = ""

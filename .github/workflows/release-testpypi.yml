@@ -73,7 +73,6 @@ jobs:
       - name: retry publish-testpypi (2nd attempt)
         if: steps.publish.outcome == 'failure'
         uses: pypa/gh-action-pypi-publish@release/v1
-        continue-on-error: true
   pypi-publish-prod:
     name: Publish to pypi
     runs-on: ubuntu-latest
@@ -100,4 +99,3 @@ jobs:
       - name: retry publish-pypi-prod (2nd attempt)
         if: steps.publish.outcome == 'failure'
         uses: pypa/gh-action-pypi-publish@release/v1
-        continue-on-error: true

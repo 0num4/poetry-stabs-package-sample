@@ -115,3 +115,8 @@ content: write を付けないと gh actions 上で該当のリポジトリへ p
 permissions:
   contents: write
 ```
+
+## **init**.py で flake8 が import not used エラーを出すやつ
+
+https://stackoverflow.com/questions/31079047/python-pep8-class-in-init-imported-but-not-used
+**all**を使える

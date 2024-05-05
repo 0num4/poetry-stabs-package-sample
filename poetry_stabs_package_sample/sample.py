@@ -8,5 +8,10 @@ def main() -> None:
 
     # def add(a: int, b: int) -> int:
     #     return a + b
-    lambda
-    test_func(add)
+    l: Callable[[int], int] = lambda x: x + 1
+    l(34)
+    nandemo(4, 6)
+
+
+def nandemo(*args) -> None:
+    print(len(args))

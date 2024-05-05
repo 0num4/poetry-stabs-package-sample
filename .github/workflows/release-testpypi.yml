@@ -4,8 +4,8 @@ on:
   #   types: [published]
   push:
     branches:
-      - main
-      - master
+      - none
+      # - master
 jobs:
   release:
     permissions:

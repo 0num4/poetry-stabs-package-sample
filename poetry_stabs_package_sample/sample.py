@@ -13,5 +13,10 @@ def main() -> None:
     nandemo(4, 6)
 
 
-def nandemo(*args) -> None:
+def nandemo(*args, **kwargs) -> None:
     print(len(args))
+    print(len(kwargs))
+
+
+if __name__ == "__main__":
+    main()

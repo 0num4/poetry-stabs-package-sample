@@ -26,14 +26,16 @@ jobs:
       - name: Check if tag exists
         id: check_tag
         run: |
-          if git rev-parse "v$(poetry version | awk '{print $2}')" >/dev/null 2>&1; then
+          if git tag | grep -q "v$(poetry version | awk '{print $2}')"; then
             echo "tag_exists=true" >> $GITHUB_OUTPUT
-          else 
+          else
             echo "tag_exists=false" >> $GITHUB_OUTPUT
           fi
       - name: Delete existing tag
         if: steps.check_tag.outputs.tag_exists == 'true'
-        run: git push --delete origin "v$(poetry version | awk '{print $2}')"
+        run: |
+          git tag -d "v$(poetry version | awk '{print $2}')"
+          git push --delete origin "v$(poetry version | awk '{print $2}')"
       - name: git tag
         run: git tag -a "v$(poetry version | awk '{print $2}')" -m "v$(poetry version | awk '{print $2}')"
       - name: git push

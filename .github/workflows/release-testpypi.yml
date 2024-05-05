@@ -112,3 +112,9 @@ jobs:
       - name: retry publish-pypi-prod (2nd attempt)
         if: steps.publish.outcome == 'failure'
         uses: pypa/gh-action-pypi-publish@release/v1
+      - name: Commit version update
+        if: success()
+        run: |
+          git add pyproject.toml
+          git commit -m "Bump version to $(poetry version | awk '{print $2}')"
+          git push

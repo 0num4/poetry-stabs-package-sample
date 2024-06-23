@@ -47,4 +47,4 @@ select = [
     "F", # pyflakes
     "D", # docstring
 ]
-ignore = ["E501"]
+ignore = ["E501", "D104"]

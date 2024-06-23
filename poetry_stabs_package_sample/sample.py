@@ -21,5 +21,10 @@ def nandemo(*args, **kwargs) -> None:
     print(len(kwargs))
 
 
+def add(a: int, b: int) -> int:
+    """testをするためのadd関数."""
+    return a + b
+
+
 if __name__ == "__main__":
     main()

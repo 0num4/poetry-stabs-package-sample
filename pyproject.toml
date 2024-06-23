@@ -30,6 +30,7 @@ setup = ""
 [tool.mypy]
 plugins = "pydantic.mypy"
 python_version = "3.12"
+strict = true
 
 [tool.ruff]
 target-version = "py312"
@@ -43,5 +44,7 @@ select = [
     "W", # Warning
     "I", # isort
     "C", # complexity
+    "F", # pyflakes
+    "D", # docstring
 ]
 ignore = ["E501"]

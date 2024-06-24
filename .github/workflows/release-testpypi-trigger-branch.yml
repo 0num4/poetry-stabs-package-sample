@@ -1,4 +1,4 @@
-name: release-pypi(test and prod)
+name: release-pypi(test and prod) trigger branch
 on:
   # release:
   #   types: [published]

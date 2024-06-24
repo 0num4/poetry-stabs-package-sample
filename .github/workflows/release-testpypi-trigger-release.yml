@@ -1,0 +1,32 @@
+name: release-pypi(test and prod) trigger release
+on:
+  release:
+    types:
+      - published
+jobs:
+  pypi-publish-test:
+    runs-on: ubuntu-latest
+    env:
+      name: pypi
+      url: https://test.pypi.org/project/poetry-stabs-package-sample/
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+      - name: print poetry version
+        run: poetry --version
+      - name: build package
+        run: poetry build
+      - name: publish-testpypi
+        id: publish
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          repository-url: https://test.pypi.org/legacy/
+        continue-on-error: true
+      - name: retry publish testpypi
+        if: steps.publish.outcome == 'failure'
+        uses: pypa/gh-action-pypi-publish@release/v1
+        continue-on-error: true
+      - name: retry publish-testpypi (2nd attempt)
+        if: steps.publish.outcome == 'failure'
+        uses: pypa/gh-action-pypi-publish@release/v1

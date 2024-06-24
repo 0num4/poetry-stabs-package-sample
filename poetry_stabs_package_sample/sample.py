@@ -15,7 +15,7 @@ def main() -> None:
     nandemo(4, 6)
 
 
-def nandemo(*args, **kwargs) -> None:
+def nandemo(*args, **kwargs) -> None:  # type: ignore
     """可変長引数のテスト関数."""
     print(len(args))
     print(len(kwargs))

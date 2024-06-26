@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "poetry-stabs-package-sample"
-version = "0.1.3"
+version = "0.1.6"
 description = "sample package for poetry-stabs"
 authors = ["0num4 <r.oonuma@matsuri-tech.com>"]
 homepage = "https://github.com/0num4"

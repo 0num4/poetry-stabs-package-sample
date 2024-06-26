@@ -34,3 +34,33 @@ jobs:
       - name: retry publish-testpypi (2nd attempt)
         if: steps.publish.outcome == 'failure'
         uses: pypa/gh-action-pypi-publish@release/v1
+  pypi-publish-prod:
+    runs-on: ubuntu-latest
+    env:
+      name: pypi
+      url: https://pypi.org/project/poetry-stabs-package-sample/
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+      - name: print poetry version
+        run: poetry --version
+      - name: build package
+        run: poetry build
+      - name: publish-pypi-prod
+        id: publish
+        uses: pypa/gh-action-pypi-publish@release/v1
+        continue-on-error: true
+      - name: retry publish-pypi-prod
+        if: steps.publish.outcome == 'failure'
+        uses: pypa/gh-action-pypi-publish@release/v1
+        continue-on-error: true
+      - name: retry publish-pypi-prod (2nd attempt)
+        if: steps.publish.outcome == 'failure'
+        uses: pypa/gh-action-pypi-publish@release/v1
+      - name: Commit version update
+        if: success()
+        run: |
+          git add pyproject.toml
+          git commit -m "Bump version to $(poetry version | awk '{print $2}')"
+          git push

@@ -9,6 +9,18 @@ poetry publish -r poetry-stabs-package-sample
 
 # 型を付ける
 
+`addは型がついている、つまりちゃんとannotateしていればpyiとかpy.typedとかは必要ない`
+自分の理解は最初こうだったんですが mypy はこけてしまう！！
+
+```
+❯ mypy awesome-poetry-cache/
+awesome-poetry-cache/awesome_poetry_cache/sample.py:1: error: Skipping analyzing "poetry_stabs_package_sample": module is installed, but missing library stubs or py.typed marker  [import-untyped]
+awesome-poetry-cache/awesome_poetry_cache/sample.py:1: note: See https://mypy.readthedocs.io/en/stable/running_mypy.html#missing-imports
+Found 1 error in 1 file (checked 3 source files)
+```
+
+https://blog.ymyzk.com/2018/09/creating-packages-using-pep-561/
+
 # テストを書く
 
 # awesome linters
@@ -120,3 +132,8 @@ permissions:
 
 https://stackoverflow.com/questions/31079047/python-pep8-class-in-init-imported-but-not-used
 **all**を使える
+
+## ref
+
+https://cylomw.hatenablog.com/entry/2021/01/19/174847
+https://blog.ymyzk.com/2018/09/creating-packages-using-pep-561/

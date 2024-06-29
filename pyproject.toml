@@ -1,12 +1,24 @@
 [tool.poetry]
 name = "poetry-stabs-package-sample"
-version = "0.1.6"
+version = "0.1.7"
 description = "sample package for poetry-stabs"
 authors = ["0num4 <r.oonuma@matsuri-tech.com>"]
 homepage = "https://github.com/0num4"
 repository = "https://github.com/0num4/poetry-stabs-package-sample"
 license = "MIT"
 readme = "README.md"
+classifiers = [
+    "Development Status :: 1 - Planning",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: Free for non-commercial use",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Software Development",
+    "Typing :: Typed",
+    "Operating System :: OS Independent",
+    "Natural Language :: Japanese",
+]
 
 [tool.poetry.dependencies]
 python = "^3.12"

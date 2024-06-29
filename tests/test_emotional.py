@@ -1,9 +1,9 @@
 """Test the no_include__init__py.py."""
 
-from poetry_stabs_package_sample import no_include__init__py
 import poetry_stabs_package_sample
 import poetry_stabs_package_sample.types
 import poetry_stabs_package_sample.types.sampleTypes
+from poetry_stabs_package_sample import no_include__init__py
 
 
 def test_my_feel():

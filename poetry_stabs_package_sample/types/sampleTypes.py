@@ -1,7 +1,7 @@
 """This is a sample module for the poetry_stabs_package_sample package."""
 
-import typing
 import enum
+import typing
 
 # これはtypeAliasなので型エラーは起きない
 myId: typing.TypeAlias = int

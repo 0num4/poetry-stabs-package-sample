@@ -31,8 +31,9 @@ black = "^24.4.2"
 mypy = "^1.10.0"
 pydantic = "^2.7.1"
 flake8 = "^7.0.0"
-
 pytest = "^8.2.2"
+pre-commit = "^3.7.1"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
